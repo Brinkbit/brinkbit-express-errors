@@ -1,0 +1,46 @@
+{
+  "name": "brinkbit-express-errors",
+  "version": "0.1.0",
+  "description": "Error handling middleware for brinkbit custom errors",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "gulp test",
+    "eslint-pre-commit": "./scripts/eslint-pre-commit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Brinkbit/brinkbit-express-errors.git"
+  },
+  "keywords": [
+    "brinkbit",
+    "express",
+    "middleware",
+    "error",
+    "http"
+  ],
+  "author": "Brinkbit",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Brinkbit/brinkbit-express-errors/issues"
+  },
+  "homepage": "https://github.com/Brinkbit/brinkbit-express-errors#readme",
+  "dependencies": {
+    "brinkbit-logger": "^0.2.2"
+  },
+  "pre-commit": [
+    "eslint-pre-commit"
+  ],
+  "devDependencies": {
+    "brinkbit-custom-errors": "^0.1.0",
+    "chai": "^3.5.0",
+    "gulp": "^3.9.1",
+    "gulp-documentation": "^2.2.0",
+    "gulp-istanbul": "^0.10.4",
+    "gulp-mocha": "^2.2.0",
+    "gulp-nsp": "^2.4.0",
+    "isparta": "^4.0.0",
+    "pre-commit": "^1.1.2",
+    "sinon": "^1.17.4",
+    "sinon-chai": "^2.8.0"
+  }
+}
