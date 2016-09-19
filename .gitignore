@@ -15,7 +15,7 @@ coverage
 
 # Coverage
 coverage
+.nyc_output
 
 # Dependency directories
 node_modules
-bower_components
