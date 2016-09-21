@@ -39,7 +39,7 @@ exports = module.exports = function errorHandler( error, req, res, next ) { // e
     }
     else {
         responseErr.description = error.description || responseErr.error;
-        responseErr.details = error.details || [];
+        responseErr.details = error.details || {};
         logger.info( `sending error response: "${error.message || responseErr.description}"` );
     }
 
