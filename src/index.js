@@ -2,11 +2,15 @@
 
 const http = require( 'http' );
 const logger = require( 'brinkbit-logger' )({ __filename });
+const customErrors = require( 'brinkbit-custom-errors' );
 
 exports = module.exports = function errorHandler( error, req, res, next ) { // eslint-disable-line complexity
     logger.debug( `handling error: "${error.message}"`, {
         status: error.status,
         message: error.message,
+        description: error.description,
+        details: error.details,
+        type: error.type,
         code: error.code,
     });
     if ( process.env.NODE_ENV === 'debug' ) logger.debug( 'stack:', error );
@@ -19,15 +23,25 @@ exports = module.exports = function errorHandler( error, req, res, next ) { // e
 
     const code = (() => {
         if ( typeof error.status === 'number' && http.STATUS_CODES[error.status]) return error.status;
-        else if ( error.code >= 400 ) return error.code;
+        else if ( error.code >= 400 && http.STATUS_CODES[error.code]) return error.code;
         return 500;
     })();
 
-    // if ( error.message ) responseErr.error_description = error.message;
     res.status( code );
-    responseErr.error = http.STATUS_CODES[code];
 
-    logger.info( `sending error response: "${error.message || responseErr.error}"`, responseErr );
+    responseErr.code = code;
+    responseErr.error = http.STATUS_CODES[code];
+    responseErr.type = error.type || customErrors.types.DEFAULTS[code];
+
+    if ( code === 500 ) {
+        logger.crit( `500: ${error.message}` );
+        logger.crit( 'stack:', error.stack );
+    }
+    else {
+        responseErr.description = error.description || responseErr.error;
+        responseErr.details = error.details || {};
+        logger.info( `sending error response: "${error.message || responseErr.description}"` );
+    }
 
     res.send( responseErr );
 };
