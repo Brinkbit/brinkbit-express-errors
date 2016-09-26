@@ -25,7 +25,7 @@ describe( 'middleware', function() {
                 error: 'Bad Request',
                 description: 'Bad Request',
                 type: 'invalid_request_error',
-                details: [],
+                details: {},
             });
         });
 
@@ -71,7 +71,7 @@ describe( 'middleware', function() {
                 error: 'Unauthorized',
                 description: 'Unauthorized',
                 type: 'authentication_error',
-                details: [],
+                details: {},
             });
         });
 
@@ -117,7 +117,7 @@ describe( 'middleware', function() {
                 error: 'Forbidden',
                 description: 'Forbidden',
                 type: 'invalid_request_error',
-                details: [],
+                details: {},
             });
         });
 
@@ -163,7 +163,7 @@ describe( 'middleware', function() {
                 error: 'Not Found',
                 description: 'Not Found',
                 type: 'invalid_request_error',
-                details: [],
+                details: {},
             });
         });
 
@@ -209,7 +209,7 @@ describe( 'middleware', function() {
                 error: 'Conflict',
                 description: 'Conflict',
                 type: 'invalid_request_error',
-                details: [],
+                details: {},
             });
         });
 
@@ -280,7 +280,7 @@ describe( 'middleware', function() {
             code: 400,
             error: 'Bad Request',
             description: 'Bad Request',
-            details: [],
+            details: {},
             type: 'invalid_request_error',
         });
     });
