@@ -5,7 +5,7 @@ const logger = require( 'brinkbit-logger' )({ __filename });
 const customErrors = require( 'brinkbit-custom-errors' );
 
 exports = module.exports = function errorHandler( error, req, res, next ) { // eslint-disable-line complexity
-    logger.debug( `handling error: "${error.message}"`, {
+    logger.error( `handling error: "${error.message}"`, {
         status: error.status,
         message: error.message,
         description: error.description,
@@ -34,13 +34,22 @@ exports = module.exports = function errorHandler( error, req, res, next ) { // e
     responseErr.type = error.type || customErrors.types.DEFAULTS[code];
 
     if ( code === 500 ) {
-        logger.crit( `500: ${error.message}` );
-        logger.crit( 'stack:', error.stack );
+        logger.emerg( '500 error', {
+            status: error.status,
+            message: error.message,
+            description: error.description,
+            details: error.details,
+            type: error.type,
+            code: error.code,
+            stack: error.stack,
+        });
     }
     else {
         responseErr.description = error.description || responseErr.error;
         responseErr.details = error.details || {};
-        logger.info( `sending error response: "${error.message || responseErr.description}"` );
+        logger.info( 'sending error response', {
+            response: error.message || responseErr.description,
+        });
     }
 
     res.send( responseErr );
