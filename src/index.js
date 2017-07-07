@@ -1,7 +1,5 @@
-'use strict';
-
 const http = require( 'http' );
-const logger = require( 'brinkbit-logger' )({ __filename });
+const logger = require( 'brinkbit-logger' ).configure();
 const customErrors = require( 'brinkbit-custom-errors' );
 
 exports = module.exports = function errorHandler( error, req, res, next ) { // eslint-disable-line complexity
