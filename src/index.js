@@ -1,8 +1,8 @@
 const http = require( 'http' );
-const logger = require( 'brinkbit-logger' ).configure();
+const logger = require( 'brinkbit-logger' )({ __filename });
 const customErrors = require( 'brinkbit-custom-errors' );
 
-exports = module.exports = function errorHandler( error, req, res, next ) { // eslint-disable-line complexity
+module.exports = function errorHandler( error, req, res, next ) { // eslint-disable-line complexity
     logger.error( `handling error: "${error.message}"`, {
         status: error.status,
         message: error.message,
@@ -50,5 +50,5 @@ exports = module.exports = function errorHandler( error, req, res, next ) { // e
         });
     }
 
-    res.send( responseErr );
+    return res.send( responseErr );
 };
